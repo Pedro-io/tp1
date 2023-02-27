@@ -1,41 +1,34 @@
-#include <string.h>
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+#include <locale.h>
+#include <ctype.h>
 
 int main()
 {
-    char entrada[30], copiaEntrada[30];               // variaveis para armazenar as palavras de entrada
-    int i, caracteresIguais = 0, tamanhoPalavra, tam; // contador, quantidade de carateres iguais e variavel para armazenamento do tamanho da entrada
+    setlocale(LC_ALL, "");
+    int i, valor = 0;
+    char entrada[30], copiaEntrada[15];
 
     scanf("%s", entrada);
 
-    tamanhoPalavra = strlen(entrada);
-    tam = strlen(entrada); // ARMAZENANDO O NUMERO DE CARACTERES EM tamanhoPalavra
-    for (i = 0; i < tam; i++)
+    // Converter a entrada digitada para minúsculas
+    for (i = 0; entrada[i]; i++)
     {
-        copiaEntrada[i] = entrada[tamanhoPalavra - 1]; // copiando o inverso da palavra em copiaEntrada
-
-        tamanhoPalavra--;
+        entrada[i] = tolower(entrada[i]);
     }
 
-    tamanhoPalavra = strlen(entrada); // descobrindo o tamanho da palavra
+    // Copiar a palavra digitada para que seja invertida
+    strcpy(copiaEntrada, entrada);
 
-    for (i = 0; i < tamanhoPalavra; i++)
-    {
-        if (entrada[i] == copiaEntrada[i])
-        {
-            caracteresIguais++;
-        }
-    }
+    // Inverter a palavra copiada
+    strrev(copiaEntrada);
 
-    if (tamanhoPalavra == caracteresIguais)
-    {
+    valor = strcmp(entrada, copiaEntrada);
+
+    if (valor == 0)
         printf("SIM");
-    }
     else
-    {
         printf("NAO");
-    }
 
     return 0;
 }
